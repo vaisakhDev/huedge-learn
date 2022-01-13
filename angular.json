@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "huedge-learning-portal"
+  "defaultProject": "huedge-learning-portal",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
