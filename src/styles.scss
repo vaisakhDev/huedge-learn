@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+$theme-colors: (
+  'primary': #ff6738,
+  'dark': #080808,
+  'light-blue': #eff2ff
+);
+
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 body {
