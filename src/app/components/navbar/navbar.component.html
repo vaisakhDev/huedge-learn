@@ -1,0 +1,53 @@
+<header
+  class="d-flex flex-wrap justify-content-center py-1 px-4 mb-4 border-bottom navbar navbar-light shadow"
+>
+  <a
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto"
+    href="#"
+    (click)="changeTab(tabs.COURSES)"
+  >
+    <img src="./assets/images/logos/Logo.png" alt="" />
+  </a>
+
+  <ul class="nav nav-pills">
+    <!-- <li class="nav-item">
+      <a href="#" class="nav-link active" aria-current="page">Home</a>
+    </li> -->
+    <li class="nav-item">
+      <a
+        href="#"
+        class="nav-link text-dark"
+        [ngClass]="{ 'fw-bold': currentTab === tabs.COURSES }"
+        (click)="changeTab(tabs.COURSES)"
+        >COURSES</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        href="#"
+        class="nav-link text-dark"
+        [ngClass]="{ 'fw-bold': currentTab === tabs.WISHLIST }"
+        (click)="changeTab(tabs.WISHLIST)"
+        >MY WISHLIST</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        href="#"
+        class="nav-link text-dark fw-bold"
+        (click)="changeTab(tabs.CART)"
+      >
+        <img src="./assets/images/icons/shopping-cart.svg" alt="" />
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        href="#"
+        class="nav-link text-dark fw-bold"
+        (click)="changeTab(tabs.PROFILE)"
+      >
+        <img src="./assets/images/icons/noun_profile_2068277.svg" alt="" />
+      </a>
+    </li>
+  </ul>
+</header>
