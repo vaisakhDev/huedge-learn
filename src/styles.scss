@@ -3,8 +3,13 @@
 $theme-colors: (
   'primary': #ff6738,
   'dark': #080808,
-  'light-blue': #eff2ff
+  'light-blue': #eff2ff,
+  'primary-dark': #e25b32
 );
+
+.fw-semi-bold {
+  font-weight: 600 !important;
+}
 
 @import '../node_modules/bootstrap/scss/bootstrap';
 

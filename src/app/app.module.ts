@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CourseCardListComponent } from './components/course-card-list/course-card-list.component';
+import { CourseCardListModule } from './components/course-card-list/course-card-list.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, DashboardComponent],
-  imports: [BrowserModule],
+  imports: [BrowserModule, CourseCardListModule],
   providers: [],
   bootstrap: [AppComponent]
 })
