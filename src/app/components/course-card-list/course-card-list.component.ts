@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { ICourse } from 'src/app/shared/models/course';
 
 @Component({
@@ -9,9 +10,12 @@ import { ICourse } from 'src/app/shared/models/course';
 export class CourseCardListComponent implements OnInit {
   @Input() courses: Array<ICourse> = [];
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.courses = this.courses.splice(0, 5);
+    this.dataService.coursesInCart.subscribe((coursesInCart) =>
+      console.log(coursesInCart)
+    );
   }
 }

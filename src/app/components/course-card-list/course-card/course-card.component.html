@@ -1,5 +1,6 @@
 <div
   class="d-flex gap-3 border my-3 align-items-center justify-content-between px-3 py-2 shadow flex-wrap flex-md-nowrap"
+  *ngIf="course"
 >
   <div class="thumbnail"></div>
   <div class="d-flex flex-column w-25">
@@ -26,6 +27,8 @@
       }}/-
     </s>
   </div>
-  <button class="btn btn-primary text-white fw-semi-bold">ADD TO CART</button>
+  <button class="btn btn-primary text-white fw-semi-bold" (click)="addToCart()">
+    ADD TO CART
+  </button>
   <img src="./assets/images/icons/arrow.svg" alt="" />
 </div>

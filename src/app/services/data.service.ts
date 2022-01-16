@@ -1,10 +1,26 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, of } from 'rxjs';
+import { ICourse } from '../shared/models/course';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   constructor() {}
+
+  coursesInCart = new BehaviorSubject<Array<ICourse>>([]);
+
+  public addCourseToCart(course: ICourse) {
+    this.coursesInCart.next(this.coursesInCart.value.concat(course));
+  }
+
+  public isCourseAlreadyInCart(course: ICourse): boolean {
+    return this.coursesInCart.value.find(
+      (courseInCart) => courseInCart.id === course.id
+    )
+      ? true
+      : false;
+  }
 
   public getAllCourses(): any {
     const allCourses = [
