@@ -1,0 +1,35 @@
+<div
+  class="d-flex gap-3 border align-items-center justify-content-between px-3 py-2 shadow flex-wrap flex-md-nowrap"
+  *ngIf="course"
+>
+  <div class="thumbnail"></div>
+  <div class="d-flex flex-column w-25">
+    <div class="text-dark title fw-semi-bold">{{ course.title }}</div>
+    <div class="d-flex flex-wrap gap-2">
+      <span *ngFor="let tag of course.tags" class="badge bg-primary-dark">{{
+        tag
+      }}</span>
+    </div>
+  </div>
+  <div class="text-muted w-25">
+    {{ course.author }}
+  </div>
+  <img src="./assets/images/icons/star-filled.svg" alt="Selected star" />
+  <div class="w-10 fs-5 text-dark fw-bold">
+    Rs{{
+      course.discountedPrice ? course.discountedPrice : course.actualPrice
+    }}/-
+  </div>
+  <div class="w-5">
+    <s>
+      Rs{{
+        course.discountedPrice ? course.actualPrice : course.discountedPrice
+      }}/-
+    </s>
+  </div>
+  <button class="btn btn-primary text-white fw-semi-bold" (click)="addToCart()">
+    ADD TO CART
+  </button>
+  <img src="./assets/images/icons/arrow.svg" alt="" />
+</div>
+<div #modal></div>

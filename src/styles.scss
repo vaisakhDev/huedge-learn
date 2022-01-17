@@ -1,2 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/bootstrap/scss/bootstrap";
+
+$theme-colors: (
+  'primary': #ff6738,
+  'dark': #080808,
+  'light-blue': #eff2ff,
+  'primary-dark': #e25b32
+);
+
+.fw-semi-bold {
+  font-weight: 600 !important;
+}
+
+.fw-medium {
+  font-weight: 500 !important;
+}
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+}

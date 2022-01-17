@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tabs } from './shared/tabs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'huedge-learning-portal';
+
+  public ALL_TABS = Tabs;
+  public selectedTab: Tabs = Tabs.COURSES;
+
+  public onTabChange(newTab: Tabs) {
+    if (this.selectedTab === newTab) return;
+    this.selectedTab = newTab;
+  }
 }
