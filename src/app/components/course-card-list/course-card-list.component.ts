@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { ICourse } from 'src/app/shared/models/course';
+import { SortOrder } from 'src/app/shared/shared.constants';
 
 @Component({
   selector: 'app-course-card-list',
@@ -16,6 +17,7 @@ import { ICourse } from 'src/app/shared/models/course';
 export class CourseCardListComponent implements OnInit, OnChanges {
   @Input() courses: Array<ICourse> = [];
   @Input() searchFilter = '';
+  @Input() sortOrder = SortOrder.ASC;
   public paginatedCourses: Array<Array<ICourse>> = [];
   public pageSize: number = 4; // number of items displayed on each page
   public currentPageIndex = 0;
@@ -23,12 +25,22 @@ export class CourseCardListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['searchFilter']) {
-      this.filterCourses();
+      // Reset page to first page.
+      this.currentPageIndex = 0;
+      const filteredCourses = this.filterCourses();
+      this.paginatedCourses = this.splitToPages(filteredCourses);
+    }
+    if (changes['sortOrder']) {
+      this.currentPageIndex = 0;
+      const sortedCourses = this.sortCourses(this.filterCourses());
+      this.paginatedCourses = this.splitToPages([...sortedCourses]);
     }
   }
 
   ngOnInit(): void {
-    this.paginatedCourses = this.splitToPages([...this.courses]);
+    this.paginatedCourses = this.splitToPages(
+      this.sortCourses([...this.courses])
+    );
   }
 
   public nextPage() {
@@ -53,16 +65,31 @@ export class CourseCardListComponent implements OnInit, OnChanges {
     return results;
   }
 
-  private filterCourses() {
-    // Reset page to first page.
-    this.currentPageIndex = 0;
-    let filteredCourses = this.courses.filter(
+  private filterCourses(): Array<ICourse> {
+    const filteredCourses = this.courses.filter(
       (course) =>
         course.author.includes(this.searchFilter) ||
         course.title.includes(this.searchFilter) ||
         course.tags.find((tag) => tag.includes(this.searchFilter))
     );
+    return filteredCourses;
+  }
 
-    this.paginatedCourses = this.splitToPages(filteredCourses);
+  private sortCourses(courses: Array<ICourse>) {
+    const returnVal = courses;
+    if (this.sortOrder === SortOrder.ASC) {
+      returnVal.sort(
+        (a, b) =>
+          (a.discountedPrice ? a.discountedPrice : a.actualPrice) -
+          (b.discountedPrice ? b.discountedPrice : b.actualPrice)
+      );
+    } else {
+      returnVal.sort(
+        (a, b) =>
+          (b.discountedPrice ? b.discountedPrice : b.actualPrice) -
+          (a.discountedPrice ? a.discountedPrice : a.actualPrice)
+      );
+    }
+    return returnVal;
   }
 }

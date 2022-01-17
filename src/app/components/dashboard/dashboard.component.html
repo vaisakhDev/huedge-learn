@@ -17,9 +17,21 @@
         </a>
 
         <div class="dropdown-menu d-block" *ngIf="isDropdownVisible">
-          <a class="dropdown-item" href="#">Low to High</a>
+          <a
+            [ngClass]="{ active: selectedSortOrder === SortOrder.ASC }"
+            class="dropdown-item"
+            href="#"
+            (click)="changeSortOrder(SortOrder.ASC)"
+            >Low to High</a
+          >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">High to Low</a>
+          <a
+            [ngClass]="{ active: selectedSortOrder === SortOrder.DESC }"
+            class="dropdown-item"
+            href="#"
+            (click)="changeSortOrder(SortOrder.DESC)"
+            >High to Low</a
+          >
         </div>
       </div>
     </div>
@@ -42,6 +54,7 @@
       <app-course-card-list
         [courses]="courses"
         [searchFilter]="searchFilter"
+        [sortOrder]="selectedSortOrder"
       ></app-course-card-list>
     </div>
     <div class="w-25 position-sticky align-self-start sticky-top">
