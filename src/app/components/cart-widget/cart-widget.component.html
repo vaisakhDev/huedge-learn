@@ -1,0 +1,32 @@
+<div class="d-flex flex-column shadow justify-content-between py-2 h-100">
+  <div class="fw-semi-bold text-black text-center border-bottom py-3 mx-3">
+    YOUR CART DETAILS
+  </div>
+  <div class="mx-3 align-self-start h-100 py-2">
+    <div class="text-muted fst-italic fw-medium" *ngIf="!coursesInCart.length">
+      Your cart is empty right now. Please add courses in the cart from the list
+    </div>
+    <div *ngIf="coursesInCart.length" class="d-flex gap-2 flex-column">
+      <div
+        class="d-flex flex-column gap-1 border-bottom"
+        *ngFor="let course of coursesInCart"
+      >
+        <div class="d-flex gap-1 justify-content-center align-items-center">
+          <div class="thumbnail"></div>
+          <div class="text-black fw-medium title w-75">{{ course.title }}</div>
+        </div>
+        <div class="fw-bold text-black price align-self-end">
+          Rs{{
+            course.discountedPrice
+              ? course.discountedPrice
+              : course.actualPrice
+          }}/-
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mx-3 border-top">
+    <div class="text-black fw-medium">Total Cart Value</div>
+    <div class="text-black fs-3 fw-bold">Rs 0/-</div>
+  </div>
+</div>

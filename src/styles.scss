@@ -11,6 +11,10 @@ $theme-colors: (
   font-weight: 600 !important;
 }
 
+.fw-medium {
+  font-weight: 500 !important;
+}
+
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 body {

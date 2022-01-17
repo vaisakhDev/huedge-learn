@@ -6,9 +6,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CourseCardListComponent } from './components/course-card-list/course-card-list.component';
 import { CourseCardListModule } from './components/course-card-list/course-card-list.module';
+import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, DashboardComponent],
+  declarations: [AppComponent, NavbarComponent, DashboardComponent, CartWidgetComponent],
   imports: [BrowserModule, CourseCardListModule],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,6 @@
-<div *ngFor="let course of courses" class="d-flex gap-2 flex-column">
-  <app-course-card [course]="course"></app-course-card>
+<div class="d-flex gap-4 flex-column">
+  <app-course-card
+    [course]="course"
+    *ngFor="let course of courses"
+  ></app-course-card>
 </div>
