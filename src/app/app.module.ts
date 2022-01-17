@@ -7,10 +7,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CourseCardListComponent } from './components/course-card-list/course-card-list.component';
 import { CourseCardListModule } from './components/course-card-list/course-card-list.module';
 import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, DashboardComponent, CartWidgetComponent],
-  imports: [BrowserModule, CourseCardListModule],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    DashboardComponent,
+    CartWidgetComponent
+  ],
+  imports: [BrowserModule, CourseCardListModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

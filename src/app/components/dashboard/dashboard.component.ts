@@ -10,6 +10,7 @@ import { ICourse } from 'src/app/shared/models/course';
 export class DashboardComponent implements OnInit {
   isDropdownVisible = false;
   courses: Array<ICourse> = [];
+  searchFilter = '';
 
   constructor(private renderer: Renderer2, private dataService: DataService) {}
 
