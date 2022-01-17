@@ -9,6 +9,7 @@
     class="d-flex gap-2 justify-content-between w-25 align-items-center pt-5"
   >
     <button
+      data-testid="prev-page-button"
       class="btn btn-sm rounded-circle my-2 d-flex justify-content-center align-items-center"
       (click)="previousPage()"
       [disabled]="currentPageIndex === 0"
@@ -27,6 +28,7 @@
       {{ i + 1 }}
     </button>
     <button
+      data-testid="next-page-button"
       class="btn btn-sm rounded-circle my-2 d-flex justify-content-center align-items-center"
       (click)="nextPage()"
       [disabled]="currentPageIndex === paginatedCourses.length - 1"
