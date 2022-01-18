@@ -18,6 +18,7 @@ export class CourseCardListComponent implements OnInit, OnChanges {
   @Input() courses: Array<ICourse> = [];
   @Input() searchFilter = '';
   @Input() sortOrder = SortOrder.ASC;
+  @Input() isCartMode = false;
   public paginatedCourses: Array<Array<ICourse>> = [];
   public pageSize: number = 4; // number of items displayed on each page
   public currentPageIndex = 0;
@@ -34,6 +35,10 @@ export class CourseCardListComponent implements OnInit, OnChanges {
       this.currentPageIndex = 0;
       const sortedCourses = this.sortCourses(this.filterCourses());
       this.paginatedCourses = this.splitToPages([...sortedCourses]);
+    }
+    if (changes['courses']) {
+      this.currentPageIndex = 0;
+      this.paginatedCourses = this.splitToPages([...this.courses]);
     }
   }
 

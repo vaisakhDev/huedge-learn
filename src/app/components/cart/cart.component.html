@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center mx-5 flex-column gap-2">
+  <div class="banner w-100 px-3 py-4 text-white bg-dark fw-semi-bold fs-20px">
+    Shoppping Cart
+  </div>
+
+  <div class="d-flex w-100 justify-content-between align-items-center">
+    <div
+      class="d-flex justify-content-between w-75 px-2 py-4 fw-semi-bold text-black fs-20px"
+    >
+      <div>{{ courses.length }} Courses in Cart</div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-stretch gap-2">
+    <div class="w-75">
+      <app-course-card-list
+        [courses]="courses"
+        [isCartMode]="true"
+      ></app-course-card-list>
+      <div class="border pt-2 px-2 pb-4 mt-5">
+        <div class="text-muted fw-semi-bold fs-18px py-2">
+          Recommended Courses
+        </div>
+
+        <app-course-card-list
+          [courses]="recommendedCourses"
+        ></app-course-card-list>
+      </div>
+    </div>
+    <div class="w-25 position-sticky align-self-start sticky-top">
+      <div
+        class="d-flex flex-column shadow justify-content-around align-items-start pt-3 pb-2 px-4"
+        style="height: 200px"
+      >
+        <div class="text-black fw-medium fs-18px">Total Amount</div>
+
+        <div class="fw-semi-bold text-black fs-30px">
+          Rs {{ totalAmount }}/-
+        </div>
+        <div class="text-green small fw-semi-bold">
+          You have saved Rs {{ totalAmountSaved }}/-
+        </div>
+        <button
+          class="btn btn-primary text-white w-100 py-2"
+          (click)="checkout()"
+        >
+          CHECKOUT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
