@@ -4,7 +4,8 @@ $theme-colors: (
   'primary': #ff6738,
   'dark': #080808,
   'light-blue': #eff2ff,
-  'primary-dark': #e25b32
+  'primary-dark': #e25b32,
+  'green': #629a33
 );
 
 .fw-semi-bold {
@@ -13,6 +14,18 @@ $theme-colors: (
 
 .fw-medium {
   font-weight: 500 !important;
+}
+
+.fs-18px {
+  font-size: 1.125rem;
+}
+
+.fs-30px {
+  font-size: 1.875rem;
+}
+
+.fs-20px {
+  font-size: 1.25rem;
 }
 
 @import '../node_modules/bootstrap/scss/bootstrap';

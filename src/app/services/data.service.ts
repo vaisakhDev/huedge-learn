@@ -8,10 +8,23 @@ import { ICourse } from '../shared/models/course';
 export class DataService {
   constructor() {}
 
-  coursesInCart = new BehaviorSubject<Array<ICourse>>([]);
+  coursesInCart = new BehaviorSubject<Array<ICourse>>(this.getCartList());
 
   public addCourseToCart(course: ICourse) {
     this.coursesInCart.next(this.coursesInCart.value.concat(course));
+    this.saveCartList(this.coursesInCart.value);
+  }
+
+  public removeCourseFromCart(course: ICourse) {
+    this.coursesInCart.next(
+      this.coursesInCart.value.filter((c) => c.id !== course.id)
+    );
+    this.saveCartList(this.coursesInCart.value);
+  }
+
+  public emptyCart() {
+    this.coursesInCart.next([]);
+    this.saveCartList(this.coursesInCart.value);
   }
 
   public isCourseAlreadyInCart(course: ICourse): boolean {
@@ -196,5 +209,56 @@ export class DataService {
       }
     ];
     return allCourses;
+  }
+
+  public getRecommendedCourses(): Array<ICourse> {
+    return [
+      {
+        actualPrice: 728,
+        id: 5,
+        author: 'Terry Lubowitz',
+        tags: ['rem', 'consequatur', 'vero'],
+        details:
+          'Quaerat deleniti provident ipsam dolorem quisquam sint tempore. Atque magni aut tempore aperiam nesciunt rerum rerum non. Officiis accusamus nihil perspiciatis. Reprehenderit aliquid quam rerum cumque quia sunt.\n \rMolestias consectetur fuga perferendis facilis harum perferendis dolorem. Modi et eaque. Voluptatem repellat sint ut nam sapiente omnis voluptas eos. Alias hic et voluptatem aspernatur dolorem et provident. Quibusdam numquam libero placeat. Dolorem nostrum accusamus aspernatur odit temporibus porro qui in distinctio.\n \rIn ratione quam dolore. Exercitationem qui dolorum ut dolorem commodi sequi accusamus eum reiciendis. Natus maxime temporibus eum eos alias consequatur voluptas quia.',
+        description:
+          'Omnis enim rerum cum nihil voluptas commodi sit libero quo.',
+        title: 'at omnis nobis adipisci sint'
+      },
+      {
+        actualPrice: 819,
+        discountedPrice: 560,
+        id: 6,
+        author: 'Jacquelyn Vandervort',
+        tags: ['voluptatem', 'ea', 'ut'],
+        details:
+          'Ab dignissimos quo consequatur autem culpa maxime amet quidem voluptatem. Necessitatibus ut molestiae quia. Accusantium quia provident numquam.\n \rAut esse facere aut velit expedita molestiae temporibus. Nesciunt reprehenderit corrupti nulla cumque molestiae. Vel nobis voluptas eaque aut perspiciatis est est sint magni. Ea debitis quod corrupti.\n \rTotam distinctio sed explicabo et provident tempora. Ea aut autem. Et laborum blanditiis sapiente quidem mollitia possimus et earum qui. Voluptate ut et error nemo libero quo.',
+        description:
+          'Facere sit consectetur sunt sunt rerum libero doloremque fuga.',
+        title: 'voluptates similique mollitia veniam'
+      },
+      {
+        actualPrice: 722,
+        discountedPrice: 550,
+        id: 7,
+        author: 'Karla Dibbert',
+        tags: ['alias', 'aut'],
+        details:
+          'Aliquam animi vitae ea rerum dolorem nulla laborum. Veritatis repudiandae expedita ducimus sunt. Et adipisci necessitatibus quibusdam. Sint qui enim aut modi id ad. Quia voluptas illum.\n \rVoluptas ratione dolor qui assumenda dignissimos quia beatae ad. Quae adipisci eos eveniet. Nisi voluptate quia ipsam qui ipsam est maiores sequi cum.\n \rMaxime eum et provident amet consequatur aut placeat. Sint deleniti qui. Beatae nesciunt dignissimos asperiores aperiam ut ducimus. Voluptatem quis ipsum eveniet dignissimos vero atque sit error. Ut sit facilis aut in quibusdam rerum reiciendis est.',
+        description: 'Voluptas doloremque accusamus ipsum facere impedit sed.',
+        title: 'nostrum quod provident quia'
+      }
+    ];
+  }
+
+  private saveCartList(courses: Array<ICourse>) {
+    localStorage.setItem('cart', JSON.stringify(courses));
+  }
+
+  private getCartList(): Array<ICourse> {
+    let cartItems = '[]';
+    if (localStorage.getItem('cart')) {
+      cartItems = localStorage.getItem('cart') as string;
+    }
+    return JSON.parse(cartItems);
   }
 }

@@ -1,11 +1,20 @@
 <ng-container *ngIf="paginatedCourses.length">
   <div class="d-flex gap-4 flex-column">
-    <app-course-card
-      [course]="course"
-      *ngFor="let course of paginatedCourses[currentPageIndex]"
-    ></app-course-card>
+    <ng-container *ngIf="isCartMode">
+      <app-selected-course-card
+        [course]="course"
+        *ngFor="let course of paginatedCourses[currentPageIndex]"
+      ></app-selected-course-card>
+    </ng-container>
+    <ng-container *ngIf="!isCartMode">
+      <app-course-card
+        [course]="course"
+        *ngFor="let course of paginatedCourses[currentPageIndex]"
+      ></app-course-card>
+    </ng-container>
   </div>
   <div
+    *ngIf="paginatedCourses.length > 1"
     class="d-flex gap-2 justify-content-between w-25 align-items-center pt-5"
   >
     <button
@@ -38,6 +47,9 @@
   </div>
 </ng-container>
 
-<div class="text-muted fst-italic fw-medium" *ngIf="!paginatedCourses.length">
+<div
+  class="text-muted fst-italic fw-medium"
+  *ngIf="!paginatedCourses.length && !isCartMode"
+>
   No matching courses found for "{{ searchFilter }}"
 </div>

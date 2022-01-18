@@ -9,6 +9,7 @@ import { CourseCardListModule } from './components/course-card-list/course-card-
 import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ModalComponent } from './components/modal/modal.component';
     NavbarComponent,
     DashboardComponent,
     CartWidgetComponent,
-    ModalComponent
+    ModalComponent,
+    CartComponent
   ],
   imports: [BrowserModule, CourseCardListModule, FormsModule],
   providers: [],
