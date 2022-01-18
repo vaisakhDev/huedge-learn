@@ -30,6 +30,8 @@
   <button class="btn btn-primary text-white fw-semi-bold" (click)="addToCart()">
     ADD TO CART
   </button>
-  <img src="./assets/images/icons/arrow.svg" alt="" />
+  <a href="#" [routerLink]="['/course', course.id]"
+    ><img src="./assets/images/icons/arrow.svg" alt=""
+  /></a>
 </div>
 <div #modal></div>

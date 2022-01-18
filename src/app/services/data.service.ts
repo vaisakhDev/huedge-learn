@@ -35,7 +35,7 @@ export class DataService {
       : false;
   }
 
-  public getAllCourses(): any {
+  public getAllCourses(): Array<any> {
     const allCourses = [
       {
         tags: ['accusantium', 'suscipit', 'adipisci'],
@@ -209,6 +209,25 @@ export class DataService {
       }
     ];
     return allCourses;
+  }
+
+  public getCourseById(courseId: number): ICourse {
+    const course = this.getAllCourses().find((course) => course.id == courseId);
+    let actualPrice = Number(course.actualPrice);
+    let discountedPrice = course.discountedPrice
+      ? Number(course.discountedPrice)
+      : null;
+    let id = Number(course.id);
+    return <ICourse>{
+      actualPrice,
+      discountedPrice,
+      id,
+      author: course.author,
+      tags: course.tags,
+      details: course.details,
+      description: course.description,
+      title: course.title
+    };
   }
 
   public getRecommendedCourses(): Array<ICourse> {
