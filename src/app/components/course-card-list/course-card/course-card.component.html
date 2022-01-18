@@ -14,7 +14,16 @@
   <div class="text-muted w-25">
     {{ course.author }}
   </div>
-  <img src="./assets/images/icons/star-filled.svg" alt="Selected star" />
+  <ng-container *ngIf="!hideAddToWishlist">
+    <img
+      *ngIf="course.isWishlisted"
+      src="./assets/images/icons/star-filled.svg"
+    />
+    <a href="#" *ngIf="!course.isWishlisted" (click)="addToWishlist($event)"
+      ><img src="./assets/images/icons/star.svg"
+    /></a>
+  </ng-container>
+
   <div class="w-10 fs-5 text-dark fw-bold">
     Rs{{
       course.discountedPrice ? course.discountedPrice : course.actualPrice
@@ -29,6 +38,13 @@
   </div>
   <button class="btn btn-primary text-white fw-semi-bold" (click)="addToCart()">
     ADD TO CART
+  </button>
+  <button
+    class="btn btn-link"
+    (click)="removeFromWishlist()"
+    *ngIf="hideAddToWishlist"
+  >
+    <img src="./assets/images/icons/delete.svg" alt="" />
   </button>
   <a href="#" [routerLink]="['/course', course.id]"
     ><img src="./assets/images/icons/arrow.svg" alt=""

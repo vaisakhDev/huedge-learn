@@ -8,4 +8,7 @@ export interface ICourse {
   title: string;
   id: number;
   saleEndTime?: Date;
+  // Frontend field
+
+  isWishlisted?: boolean;
 }

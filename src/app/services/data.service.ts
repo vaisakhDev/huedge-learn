@@ -9,6 +9,7 @@ export class DataService {
   constructor() {}
 
   coursesInCart = new BehaviorSubject<Array<ICourse>>(this.getCartList());
+  coursesInWishlist = new BehaviorSubject<Array<ICourse>>(this.getWishlist());
 
   public addCourseToCart(course: ICourse) {
     this.coursesInCart.next(this.coursesInCart.value.concat(course));
@@ -22,6 +23,21 @@ export class DataService {
     this.saveCartList(this.coursesInCart.value);
   }
 
+  public addCourseToWishlist(course: ICourse) {
+    if (this.isCourseAlreadyInWishlist(course)) {
+      return;
+    }
+    this.coursesInWishlist.next(this.coursesInWishlist.value.concat(course));
+    this.saveWishlist(this.coursesInWishlist.value);
+  }
+
+  public removeCourseFromWishlist(course: ICourse) {
+    this.coursesInWishlist.next(
+      this.coursesInWishlist.value.filter((c) => c.id !== course.id)
+    );
+    this.saveWishlist(this.coursesInWishlist.value);
+  }
+
   public emptyCart() {
     this.coursesInCart.next([]);
     this.saveCartList(this.coursesInCart.value);
@@ -30,6 +46,14 @@ export class DataService {
   public isCourseAlreadyInCart(course: ICourse): boolean {
     return this.coursesInCart.value.find(
       (courseInCart) => courseInCart.id === course.id
+    )
+      ? true
+      : false;
+  }
+
+  public isCourseAlreadyInWishlist(course: ICourse): boolean {
+    return this.coursesInWishlist.value.find(
+      (courseInWishlist) => courseInWishlist.id === course.id
     )
       ? true
       : false;
@@ -283,5 +307,17 @@ export class DataService {
       cartItems = localStorage.getItem('cart') as string;
     }
     return JSON.parse(cartItems);
+  }
+
+  private saveWishlist(courses: Array<ICourse>) {
+    localStorage.setItem('wishlist', JSON.stringify(courses));
+  }
+
+  private getWishlist(): Array<ICourse> {
+    let wishListItems = '[]';
+    if (localStorage.getItem('wishlist')) {
+      wishListItems = localStorage.getItem('wishlist') as string;
+    }
+    return JSON.parse(wishListItems);
   }
 }

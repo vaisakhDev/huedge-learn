@@ -19,6 +19,7 @@ export class CourseCardListComponent implements OnInit, OnChanges {
   @Input() searchFilter = '';
   @Input() sortOrder = SortOrder.ASC;
   @Input() isCartMode = false;
+  @Input() hideAddToWishlist = false;
   public paginatedCourses: Array<Array<ICourse>> = [];
   public pageSize: number = 4; // number of items displayed on each page
   public currentPageIndex = 0;
@@ -28,8 +29,8 @@ export class CourseCardListComponent implements OnInit, OnChanges {
     if (changes['searchFilter']) {
       // Reset page to first page.
       this.currentPageIndex = 0;
-      const filteredCourses = this.filterCourses();
-      this.paginatedCourses = this.splitToPages(filteredCourses);
+      const sortedCourses = this.sortCourses(this.filterCourses());
+      this.paginatedCourses = this.splitToPages([...sortedCourses]);
     }
     if (changes['sortOrder']) {
       this.currentPageIndex = 0;
@@ -71,11 +72,12 @@ export class CourseCardListComponent implements OnInit, OnChanges {
   }
 
   private filterCourses(): Array<ICourse> {
+    const searchTerm = this.searchFilter.toLowerCase();
     const filteredCourses = this.courses.filter(
       (course) =>
-        course.author.includes(this.searchFilter) ||
-        course.title.includes(this.searchFilter) ||
-        course.tags.find((tag) => tag.includes(this.searchFilter))
+        course.author.toLowerCase().includes(searchTerm) ||
+        course.title.toLowerCase().includes(searchTerm) ||
+        course.tags.find((tag) => tag.toLowerCase().includes(searchTerm))
     );
     return filteredCourses;
   }

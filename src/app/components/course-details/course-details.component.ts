@@ -68,6 +68,10 @@ export class CourseDetailsComponent implements OnDestroy {
     );
   }
 
+  public addToWishlist() {
+    this.dataService.addCourseToWishlist(this.courseDetails);
+  }
+
   ngOnDestroy(): void {
     if (this.routeSub) {
       this.routeSub.unsubscribe();

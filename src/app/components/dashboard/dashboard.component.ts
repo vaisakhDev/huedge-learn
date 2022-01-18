@@ -22,9 +22,20 @@ export class DashboardComponent implements OnInit {
     this.renderer.listen('window', 'click', (e: Event) => {
       this.isDropdownVisible = false;
     });
+    this.dataService.coursesInWishlist.subscribe((wishlistItems) => {
+      const courses = [...this.courses];
+      let formattedCourses = courses.map((course) => {
+        if (wishlistItems.find((item) => item.id === course.id)) {
+          course.isWishlisted = true;
+        }
+        return course;
+      });
+      this.courses === [...formattedCourses];
+    });
   }
 
   public toggleDropdown(event: Event) {
+    event.preventDefault();
     event.stopPropagation();
     this.isDropdownVisible = !this.isDropdownVisible;
   }
