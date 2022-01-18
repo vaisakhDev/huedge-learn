@@ -28,19 +28,4 @@ describe('NavbarComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.nav-link').textContent).toBe('COURSES');
   });
-
-  it('should correctly @Output value of the selected Tab', () => {
-    const tabChangeEventSpy = spyOn(component.tabChangeEvent, 'emit');
-
-    const wishlistNavLink = fixture.debugElement.query(
-      (debugEl) =>
-        debugEl.name === 'a' &&
-        debugEl.nativeElement.textContent === 'MY WISHLIST'
-    );
-
-    wishlistNavLink.nativeElement.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-
-    expect(tabChangeEventSpy).toHaveBeenCalledWith(Tabs.WISHLIST); // 4
-  });
 });
