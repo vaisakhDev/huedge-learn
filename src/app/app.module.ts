@@ -12,11 +12,13 @@ import { CartComponent } from './components/cart/cart.component';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
 import { RouterModule } from '@angular/router';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ProfileComponent } from './components/profile/profile.component';
 const routes = [
   { path: 'course/:id', component: CourseDetailsComponent },
   { path: 'courses', component: DashboardComponent },
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '', redirectTo: '/courses', pathMatch: 'full' }
 ];
 
@@ -29,7 +31,8 @@ const routes = [
     ModalComponent,
     CartComponent,
     CourseDetailsComponent,
-    WishlistComponent
+    WishlistComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

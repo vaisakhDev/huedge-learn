@@ -8,6 +8,8 @@ $theme-colors: (
   'green': #629a33
 );
 
+$primary: #ff6738;
+
 $position-values: (
   10: 10%,
   15: 15%
@@ -35,6 +37,14 @@ $position-values: (
 
 .fs-24px {
   font-size: 1.5rem;
+}
+
+.fs-12px {
+  font-size: 0.75rem;
+}
+
+.form-control {
+  background-color: #f6f8ff !important;
 }
 
 @import '../node_modules/bootstrap/scss/bootstrap';
