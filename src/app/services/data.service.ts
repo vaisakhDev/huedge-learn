@@ -9,6 +9,7 @@ export class DataService {
   constructor() {}
 
   coursesInCart = new BehaviorSubject<Array<ICourse>>(this.getCartList());
+  coursesInWishlist = new BehaviorSubject<Array<ICourse>>(this.getWishlist());
 
   public addCourseToCart(course: ICourse) {
     this.coursesInCart.next(this.coursesInCart.value.concat(course));
@@ -20,6 +21,21 @@ export class DataService {
       this.coursesInCart.value.filter((c) => c.id !== course.id)
     );
     this.saveCartList(this.coursesInCart.value);
+  }
+
+  public addCourseToWishlist(course: ICourse) {
+    if (this.isCourseAlreadyInWishlist(course)) {
+      return;
+    }
+    this.coursesInWishlist.next(this.coursesInWishlist.value.concat(course));
+    this.saveWishlist(this.coursesInWishlist.value);
+  }
+
+  public removeCourseFromWishlist(course: ICourse) {
+    this.coursesInWishlist.next(
+      this.coursesInWishlist.value.filter((c) => c.id !== course.id)
+    );
+    this.saveWishlist(this.coursesInWishlist.value);
   }
 
   public emptyCart() {
@@ -35,7 +51,15 @@ export class DataService {
       : false;
   }
 
-  public getAllCourses(): any {
+  public isCourseAlreadyInWishlist(course: ICourse): boolean {
+    return this.coursesInWishlist.value.find(
+      (courseInWishlist) => courseInWishlist.id === course.id
+    )
+      ? true
+      : false;
+  }
+
+  public getAllCourses(): Array<any> {
     const allCourses = [
       {
         tags: ['accusantium', 'suscipit', 'adipisci'],
@@ -183,7 +207,8 @@ export class DataService {
         actualPrice: '855.00',
         author: 'Benny Swaniawski',
         title: 'ea sint repudiandae temporibus sit maiores',
-        id: '13'
+        id: '13',
+        saleEndTime: '2022-01-19T01:48:00'
       },
       {
         tags: ['delectus'],
@@ -205,10 +230,32 @@ export class DataService {
         actualPrice: '835.00',
         author: 'Kelvin Dooley',
         title: 'doloribus neque aliquam',
-        id: '15'
+        id: '15',
+        saleEndTime: '2022-01-19T02:48:00'
       }
     ];
     return allCourses;
+  }
+
+  public getCourseById(courseId: number): ICourse {
+    const course = this.getAllCourses().find((course) => course.id == courseId);
+    let actualPrice = Number(course.actualPrice);
+    let discountedPrice = course.discountedPrice
+      ? Number(course.discountedPrice)
+      : null;
+    let saleEndTime = course.saleEndTime ? new Date(course.saleEndTime) : null;
+    let id = Number(course.id);
+    return <ICourse>{
+      actualPrice,
+      discountedPrice,
+      id,
+      author: course.author,
+      tags: course.tags,
+      details: course.details,
+      description: course.description,
+      title: course.title,
+      saleEndTime
+    };
   }
 
   public getRecommendedCourses(): Array<ICourse> {
@@ -260,5 +307,17 @@ export class DataService {
       cartItems = localStorage.getItem('cart') as string;
     }
     return JSON.parse(cartItems);
+  }
+
+  private saveWishlist(courses: Array<ICourse>) {
+    localStorage.setItem('wishlist', JSON.stringify(courses));
+  }
+
+  private getWishlist(): Array<ICourse> {
+    let wishListItems = '[]';
+    if (localStorage.getItem('wishlist')) {
+      wishListItems = localStorage.getItem('wishlist') as string;
+    }
+    return JSON.parse(wishListItems);
   }
 }

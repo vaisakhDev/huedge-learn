@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center mx-5 flex-column gap-2">
+  <div class="banner w-100 px-3 py-4 text-white bg-dark fw-semi-bold fs-20px">
+    Discover Latest Courses on Angular
+  </div>
+  <div class="py-4 px-3" *ngIf="courseDetails">
+    <a
+      href="#"
+      class="fw-light fs-20px text-decoration-none text-dark"
+      routerLink="/courses"
+      >All Courses</a
+    >
+    <span class="text-dark fw-medium fs-20px">
+      <span class="px-3">></span>
+      {{ courseDetails.title }}
+    </span>
+  </div>
+</div>
+<div class="bg-dark text-white w-100 position-relative px-5">
+  <div class="fw-semi-bold fs-24px pt-3">{{ courseDetails.title }}</div>
+  <div class="fw-light fs-18px pb-2">{{ courseDetails.description }}</div>
+  <div class="text-primary fw-light pt-4">{{ courseDetails.author }}</div>
+  <div class="d-flex flex-wrap gap-2 py-5">
+    <span
+      *ngFor="let tag of courseDetails.tags"
+      class="badge bg-white text-muted"
+      >{{ tag }}</span
+    >
+  </div>
+  <div class="position-absolute top-15 end-10">
+    <iframe
+      class="border mb-2"
+      [src]="safeUrl"
+      width="455"
+      height="256"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+    <div class="border px-2 py-3" style="width: 455px">
+      <div class="fs-30px text-dark fw-bold">
+        Rs
+        {{
+          courseDetails.discountedPrice
+            ? courseDetails.discountedPrice
+            : courseDetails.actualPrice
+        }}/-
+      </div>
+      <div class="text-muted fw-light fs-20px">
+        <s>
+          Rs
+          {{
+            courseDetails.discountedPrice
+              ? courseDetails.actualPrice
+              : courseDetails.discountedPrice
+          }}/-
+        </s>
+      </div>
+      <div
+        class="text-primary fw-light py-4"
+        *ngIf="courseDetails.discountedPrice && hoursToSaleEnd"
+      >
+        <img src="./assets/images/icons/clock.svg" alt="Clock Icon" />
+        <span class="fw-semi-bold px-2">{{ hoursToSaleEnd }}</span
+        >hours left for this price
+      </div>
+      <div class="d-flex align-items-center justify-content-around w-100 gap-2">
+        <button
+          class="btn btn-primary text-white same-width"
+          (click)="addToCart()"
+        >
+          ADD TO CART
+        </button>
+        <button
+          class="btn btn-outline-primary same-width"
+          (click)="addToWishlist()"
+        >
+          ADD TO WISHLIST
+          <img src="./assets/images/icons/wish-list.svg" class="px-1" />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-3 border mx-5 w-50 mt-3">
+  <div class="fw-semi-bold fs-18px">Course Details</div>
+  <div>{{ courseDetails.details }}</div>
+</div>
+<div #modal></div>

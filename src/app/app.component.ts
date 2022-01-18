@@ -8,8 +8,6 @@ import { Tabs } from './shared/tabs';
 })
 export class AppComponent {
   title = 'huedge-learning-portal';
-
-  public ALL_TABS = Tabs;
   public selectedTab: Tabs = Tabs.COURSES;
 
   public onTabChange(newTab: Tabs) {

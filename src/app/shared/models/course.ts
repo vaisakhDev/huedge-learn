@@ -7,4 +7,8 @@ export interface ICourse {
   author: string;
   title: string;
   id: number;
+  saleEndTime?: Date;
+  // Frontend field
+
+  isWishlisted?: boolean;
 }

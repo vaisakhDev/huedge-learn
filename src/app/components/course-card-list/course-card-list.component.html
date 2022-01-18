@@ -8,6 +8,7 @@
     </ng-container>
     <ng-container *ngIf="!isCartMode">
       <app-course-card
+        [hideAddToWishlist]="hideAddToWishlist"
         [course]="course"
         *ngFor="let course of paginatedCourses[currentPageIndex]"
       ></app-course-card>
@@ -51,5 +52,5 @@
   class="text-muted fst-italic fw-medium"
   *ngIf="!paginatedCourses.length && !isCartMode"
 >
-  No matching courses found for "{{ searchFilter }}"
+  No courses found!
 </div>

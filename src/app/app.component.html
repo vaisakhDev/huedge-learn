@@ -1,8 +1,2 @@
-<app-navbar (tabChangeEvent)="onTabChange($event)"></app-navbar>
-
-<div *ngIf="selectedTab === ALL_TABS.COURSES">
-  <app-dashboard></app-dashboard>
-</div>
-<div *ngIf="selectedTab === ALL_TABS.WISHLIST">Wishlist omponent</div>
-<div *ngIf="selectedTab === ALL_TABS.CART"><app-cart></app-cart></div>
-<div *ngIf="selectedTab === ALL_TABS.PROFILE">Profile Component</div>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>

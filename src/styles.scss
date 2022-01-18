@@ -8,6 +8,11 @@ $theme-colors: (
   'green': #629a33
 );
 
+$position-values: (
+  10: 10%,
+  15: 15%
+);
+
 .fw-semi-bold {
   font-weight: 600 !important;
 }
@@ -26,6 +31,10 @@ $theme-colors: (
 
 .fs-20px {
   font-size: 1.25rem;
+}
+
+.fs-24px {
+  font-size: 1.5rem;
 }
 
 @import '../node_modules/bootstrap/scss/bootstrap';

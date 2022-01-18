@@ -19,6 +19,7 @@ import { ModalType } from 'src/app/shared/shared.constants';
 })
 export class CourseCardComponent implements OnInit, OnDestroy {
   @Input() course!: ICourse;
+  @Input() hideAddToWishlist = false;
   @ViewChild('modal', { read: ViewContainerRef })
   entry!: ViewContainerRef;
   sub!: Subscription;
@@ -35,7 +36,7 @@ export class CourseCardComponent implements OnInit, OnDestroy {
       this.modalService.openModal(
         this.entry,
         'Already Exist in cart',
-        `Course ${this.course.title} already exist in cart!`,
+        `Course "${this.course.title}" already exist in cart!`,
         ModalType.ERROR,
         false
       );
@@ -49,6 +50,16 @@ export class CourseCardComponent implements OnInit, OnDestroy {
       ModalType.SUCCESS,
       false
     );
+  }
+
+  public addToWishlist(event: Event) {
+    event.preventDefault();
+    this.dataService.addCourseToWishlist(this.course);
+    this.course.isWishlisted = true;
+  }
+
+  public removeFromWishlist() {
+    this.dataService.removeCourseFromWishlist(this.course);
   }
 
   ngOnDestroy(): void {

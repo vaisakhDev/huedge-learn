@@ -4,7 +4,7 @@
   <a
     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto"
     href="#"
-    (click)="changeTab(tabs.COURSES)"
+    routerLink="/courses"
   >
     <img src="./assets/images/logos/Logo.png" alt="" />
   </a>
@@ -17,8 +17,8 @@
       <a
         href="#"
         class="nav-link text-dark"
-        [ngClass]="{ 'fw-bold': currentTab === tabs.COURSES }"
-        (click)="changeTab(tabs.COURSES)"
+        routerLinkActive="fw-bold"
+        routerLink="/courses"
         >COURSES</a
       >
     </li>
@@ -26,26 +26,18 @@
       <a
         href="#"
         class="nav-link text-dark"
-        [ngClass]="{ 'fw-bold': currentTab === tabs.WISHLIST }"
-        (click)="changeTab(tabs.WISHLIST)"
+        routerLinkActive="fw-bold"
+        routerLink="/wishlist"
         >MY WISHLIST</a
       >
     </li>
     <li class="nav-item">
-      <a
-        href="#"
-        class="nav-link text-dark fw-bold"
-        (click)="changeTab(tabs.CART)"
-      >
+      <a href="#" class="nav-link text-dark fw-bold" routerLink="/cart">
         <img src="./assets/images/icons/shopping-cart.svg" alt="" />
       </a>
     </li>
     <li class="nav-item">
-      <a
-        href="#"
-        class="nav-link text-dark fw-bold"
-        (click)="changeTab(tabs.PROFILE)"
-      >
+      <a href="#" class="nav-link text-dark fw-bold" routerLink="/pofile">
         <img src="./assets/images/icons/noun_profile_2068277.svg" alt="" />
       </a>
     </li>
