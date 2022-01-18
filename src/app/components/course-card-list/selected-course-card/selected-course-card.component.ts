@@ -28,13 +28,14 @@ export class SelectedCourseCardComponent implements OnDestroy {
     private modalService: ModalService
   ) {}
 
-  public removeFromCart(event: Event) {
-    event.preventDefault();
+  public removeFromCart(event?: Event) {
+    event?.preventDefault();
     this.dataService.removeCourseFromCart(this.course);
   }
 
   public addToWishlist() {
     this.dataService.addCourseToWishlist(this.course);
+    this.removeFromCart();
   }
 
   ngOnDestroy(): void {

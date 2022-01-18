@@ -196,7 +196,8 @@ export class DataService {
         actualPrice: '737.00',
         author: 'Julie Hilpert',
         title: 'et voluptate tempore fugiat laudantium',
-        id: '12'
+        id: '12',
+        saleEndTime: '2022-01-20T01:48:00'
       },
       {
         tags: ['autem', 'minus', 'quia'],
