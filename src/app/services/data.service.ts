@@ -238,8 +238,11 @@ export class DataService {
     return allCourses;
   }
 
-  public getCourseById(courseId: number): ICourse {
+  public getCourseById(courseId: number): ICourse | null {
     const course = this.getAllCourses().find((course) => course.id == courseId);
+    if (!course) {
+      return null;
+    }
     let actualPrice = Number(course.actualPrice);
     let discountedPrice = course.discountedPrice
       ? Number(course.discountedPrice)

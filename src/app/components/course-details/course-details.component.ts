@@ -6,7 +6,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -32,12 +32,18 @@ export class CourseDetailsComponent implements OnDestroy {
     private route: ActivatedRoute,
     private dataService: DataService,
     private sanitizer: DomSanitizer,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private router: Router
   ) {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl);
     this.routeSub = this.route.params.subscribe((params) => {
       this.courseId = params['id'];
-      this.courseDetails = this.dataService.getCourseById(this.courseId);
+      const courseDetails = this.dataService.getCourseById(this.courseId);
+      if (!courseDetails) {
+        this.router.navigateByUrl('/courses');
+        return;
+      }
+      this.courseDetails = <ICourse>courseDetails;
       if (this.courseDetails.saleEndTime) {
         let hours =
           Math.abs(this.courseDetails.saleEndTime.getTime() - Date.now()) /

@@ -19,7 +19,8 @@ const routes = [
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: '/courses', pathMatch: 'full' }
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  { path: '**', component: DashboardComponent }
 ];
 
 @NgModule({
