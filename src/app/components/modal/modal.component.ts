@@ -24,7 +24,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Output() confirmEvent = new EventEmitter();
   public ModalTypes = ModalType;
   ngOnInit(): void {
-    console.log('Modal init');
     document.body.style.position = 'fixed';
   }
 
@@ -36,7 +35,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log(' Modal destroyed');
     document.body.style.position = '';
   }
 }

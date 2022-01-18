@@ -22,6 +22,11 @@ export class DataService {
     this.saveCartList(this.coursesInCart.value);
   }
 
+  public emptyCart() {
+    this.coursesInCart.next([]);
+    this.saveCartList(this.coursesInCart.value);
+  }
+
   public isCourseAlreadyInCart(course: ICourse): boolean {
     return this.coursesInCart.value.find(
       (courseInCart) => courseInCart.id === course.id
