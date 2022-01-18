@@ -183,7 +183,8 @@ export class DataService {
         actualPrice: '855.00',
         author: 'Benny Swaniawski',
         title: 'ea sint repudiandae temporibus sit maiores',
-        id: '13'
+        id: '13',
+        saleEndTime: '2022-01-19T01:48:00'
       },
       {
         tags: ['delectus'],
@@ -205,7 +206,8 @@ export class DataService {
         actualPrice: '835.00',
         author: 'Kelvin Dooley',
         title: 'doloribus neque aliquam',
-        id: '15'
+        id: '15',
+        saleEndTime: '2022-01-19T02:48:00'
       }
     ];
     return allCourses;
@@ -217,6 +219,7 @@ export class DataService {
     let discountedPrice = course.discountedPrice
       ? Number(course.discountedPrice)
       : null;
+    let saleEndTime = course.saleEndTime ? new Date(course.saleEndTime) : null;
     let id = Number(course.id);
     return <ICourse>{
       actualPrice,
@@ -226,7 +229,8 @@ export class DataService {
       tags: course.tags,
       details: course.details,
       description: course.description,
-      title: course.title
+      title: course.title,
+      saleEndTime
     };
   }
 

@@ -35,7 +35,7 @@ export class CourseCardComponent implements OnInit, OnDestroy {
       this.modalService.openModal(
         this.entry,
         'Already Exist in cart',
-        `Course ${this.course.title} already exist in cart!`,
+        `Course "${this.course.title}" already exist in cart!`,
         ModalType.ERROR,
         false
       );

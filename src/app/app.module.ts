@@ -32,7 +32,7 @@ const routes = [
     BrowserModule,
     CourseCardListModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]
