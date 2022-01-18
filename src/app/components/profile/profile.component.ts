@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ModalService } from 'src/app/services/modal.service';
+import { ModalType } from 'src/app/shared/shared.constants';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnDestroy {
   public userForm: FormGroup;
+  @ViewChild('modal', { read: ViewContainerRef })
+  private entry!: ViewContainerRef;
+  private modalSubscription!: Subscription;
+  private initialValues: any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private modalService: ModalService
+  ) {
     this.userForm = this.formBuilder.group({
       displayName: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -26,9 +42,8 @@ export class ProfileComponent implements OnInit {
       expertise: ['React', Validators.required],
       userType: ['Student', Validators.required]
     });
+    this.initialValues = this.userForm.value;
   }
-
-  ngOnInit(): void {}
 
   get displayName() {
     return this.userForm.get('displayName');
@@ -45,8 +60,22 @@ export class ProfileComponent implements OnInit {
   public onSave() {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
+      this.userForm.reset(this.initialValues);
+      this.modalService.openModal(
+        this.entry,
+        'Your profile is saved!',
+        '',
+        ModalType.SUCCESS,
+        false
+      );
     } else {
       return;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe();
     }
   }
 }
