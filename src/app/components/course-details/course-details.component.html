@@ -56,7 +56,11 @@
       </div>
       <div
         class="text-primary fw-light py-4"
-        *ngIf="courseDetails.discountedPrice && hoursToSaleEnd"
+        *ngIf="
+          courseDetails.discountedPrice &&
+          hoursToSaleEnd &&
+          hoursToSaleEnd <= 24
+        "
       >
         <img src="./assets/images/icons/clock.svg" alt="Clock Icon" />
         <span class="fw-semi-bold px-2">{{ hoursToSaleEnd }}</span

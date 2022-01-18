@@ -30,8 +30,19 @@
       </div>
     </div>
   </div>
-  <div class="mx-3 border-top">
-    <div class="text-black fw-medium">Total Cart Value</div>
-    <div class="text-black fs-3 fw-bold">Rs 0/-</div>
+  <div
+    class="px-3 py-3 border-top d-flex justify-content-between align-items-center"
+  >
+    <div>
+      <div class="text-black fw-medium">Total Cart Value</div>
+      <div class="text-black fs-3 fw-bold">Rs {{ totalCartAmount }}/-</div>
+    </div>
+    <a
+      *ngIf="coursesInCart.length"
+      href="#"
+      routerLink="/cart"
+      class="text-primary fw-medium text-decoration-none"
+      >GO TO CHECKOUT</a
+    >
   </div>
 </div>

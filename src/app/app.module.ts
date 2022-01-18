@@ -6,17 +6,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CourseCardListModule } from './components/course-card-list/course-card-list.module';
 import { CartWidgetComponent } from './components/cart-widget/cart-widget.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CourseDetailsComponent } from './components/course-details/course-details.component';
 import { RouterModule } from '@angular/router';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ProfileComponent } from './components/profile/profile.component';
 const routes = [
   { path: 'course/:id', component: CourseDetailsComponent },
   { path: 'courses', component: DashboardComponent },
   { path: 'cart', component: CartComponent },
   { path: 'wishlist', component: WishlistComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '', redirectTo: '/courses', pathMatch: 'full' }
 ];
 
@@ -29,12 +31,14 @@ const routes = [
     ModalComponent,
     CartComponent,
     CourseDetailsComponent,
-    WishlistComponent
+    WishlistComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     CourseCardListModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
