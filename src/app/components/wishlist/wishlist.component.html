@@ -20,7 +20,6 @@
           <button
             [ngClass]="{ active: selectedSortOrder === SortOrder.ASC }"
             class="dropdown-item"
-            href="#"
             (click)="changeSortOrder(SortOrder.ASC)"
           >
             Low to High
@@ -29,7 +28,6 @@
           <button
             [ngClass]="{ active: selectedSortOrder === SortOrder.DESC }"
             class="dropdown-item"
-            href="#"
             (click)="changeSortOrder(SortOrder.DESC)"
           >
             High to Low
