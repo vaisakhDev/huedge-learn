@@ -4,29 +4,39 @@
   </div>
   <div class="d-flex w-100 gap-1">
     <div class="w-25"><img src="./assets/images/profile.png" alt="" /></div>
-    <div class="d-flex border shadow-sm flex-column gap-3 w-75 p-4">
+    <form
+      class="d-flex border shadow-sm flex-column gap-3 w-75 p-4"
+      [formGroup]="userForm"
+      (ngSubmit)="onSave()"
+    >
       <div class="d-flex gap-3 justify-content-between">
         <div>
           <label for="displayName" class="form-label fw-medium fs-12px"
             >Display Name</label
           >
           <input
+            [ngClass]="{ 'is-invalid': displayName?.errors?.['required'] && displayName?.touched }"
             type="text"
             class="form-control form-control-sm"
             id="displayName"
             placeholder="John Doe"
+            formControlName="displayName"
           />
+          <div class="invalid-feedback">Display Name is required!.</div>
         </div>
         <div>
           <label for="firstName" class="form-label fw-medium fs-12px"
             >First Name</label
           >
           <input
+            [ngClass]="{ 'is-invalid': firstName?.errors?.['required'] && firstName?.touched }"
             type="text"
             class="form-control form-control-sm"
             id="firstName"
             placeholder="John"
+            formControlName="firstName"
           />
+          <div class="invalid-feedback">First Name is required!.</div>
         </div>
         <div>
           <label for="lastName" class="form-label fw-medium fs-12px"
@@ -37,16 +47,22 @@
             class="form-control form-control-sm"
             id="lastName"
             placeholder="Doe"
+            formControlName="lastName"
           />
         </div>
       </div>
       <div class="w-75">
-        <label for="bio" class="form-label fw-medium fs-12px"
+        <label for="aboutYourself" class="form-label fw-medium fs-12px"
           >About Yourself</label
         >
-        <textarea class="form-control" id="bio" rows="3"></textarea>
+        <textarea
+          class="form-control"
+          id="aboutYourself"
+          rows="3"
+          formControlName="aboutYourself"
+        ></textarea>
       </div>
-      <div>
+      <div formGroupName="areaOfInterest">
         <label class="form-label fw-medium fs-12px"
           >Your Area of Interest</label
         >
@@ -54,8 +70,8 @@
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="designer"
+            formControlName="designer"
           />
           <label class="form-check-label" for="designer"> Designer </label>
         </div>
@@ -63,8 +79,8 @@
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="developer"
+            formControlName="developer"
           />
           <label class="form-check-label" for="developer"> Developer </label>
         </div>
@@ -72,15 +88,20 @@
           <input
             class="form-check-input"
             type="checkbox"
-            value=""
             id="projectManager"
+            formControlName="projectManager"
           />
           <label class="form-check-label" for="projectManager">
             Project Manager
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="sales" />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="sales"
+            formControlName="sales"
+          />
           <label class="form-check-label" for="sales"> Sales </label>
         </div>
       </div>
@@ -92,8 +113,10 @@
           <input
             class="form-check-input"
             type="radio"
-            name="profileType"
+            name="userType"
             id="student"
+            value="Student"
+            formControlName="userType"
           />
           <label class="form-check-label" for="student"> Student </label>
         </div>
@@ -101,9 +124,10 @@
           <input
             class="form-check-input"
             type="radio"
-            name="profileType"
+            name="userType"
             id="professional"
-            checked
+            value="Professional"
+            formControlName="userType"
           />
           <label class="form-check-label" for="professional">
             Professional
@@ -112,7 +136,7 @@
       </div>
 
       <div class="border p-2">
-        <div class="mb-4">
+        <div class="mb-4" *ngIf="userType?.value === 'Professional'">
           <div class="fw-medium fs-12px mb-4">
             How much of experience you have?
           </div>
@@ -120,66 +144,70 @@
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              value="option1"
+              name="experience"
+              id="experience1"
+              value="0-5"
+              formControlName="experience"
             />
-            <label class="form-check-label" for="inlineRadio1">0-5</label>
+            <label class="form-check-label" for="experience1">0-5</label>
           </div>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              value="option2"
+              name="experience"
+              id="experience2"
+              value="5-10"
+              formControlName="experience"
             />
-            <label class="form-check-label" for="inlineRadio2">5-10</label>
+            <label class="form-check-label" for="experience2">5-10</label>
           </div>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio3"
-              value="option3"
+              name="experience"
+              id="experience3"
+              value="10 & Above"
+              formControlName="experience"
             />
-            <label class="form-check-label" for="inlineRadio3"
-              >10 & Above</label
-            >
+            <label class="form-check-label" for="experience3">10 & Above</label>
           </div>
         </div>
-        <div class="mb-4">
+        <div class="mb-4" *ngIf="userType?.value === 'Professional'">
           <div class="fw-medium fs-12px mb-4">What is your expertise</div>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio1"
-              value="option1"
+              name="expertise"
+              id="expertise1"
+              value="Java"
+              formControlName="expertise"
             />
-            <label class="form-check-label" for="inlineRadio1">Java</label>
+            <label class="form-check-label" for="expertise1">Java</label>
           </div>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio2"
-              value="option2"
+              name="expertise"
+              id="expertise2"
+              value="React"
+              formControlName="expertise"
             />
-            <label class="form-check-label" for="inlineRadio2">React</label>
+            <label class="form-check-label" for="expertise2">React</label>
           </div>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
               type="radio"
-              name="inlineRadioOptions"
-              id="inlineRadio3"
-              value="option3"
+              name="expertise"
+              id="expertise3"
+              value="Backend"
+              formControlName="expertise"
             />
-            <label class="form-check-label" for="inlineRadio3">Backend</label>
+            <label class="form-check-label" for="expertise3">Backend</label>
           </div>
         </div>
 
@@ -192,14 +220,16 @@
             class="form-control form-control-sm"
             id="role"
             placeholder="Frontend Developer"
+            formControlName="role"
           />
         </div>
       </div>
       <button
+        [disabled]="!userForm.valid"
         class="btn btn-primary text-white px-5 py-2 align-self-end flex-shrink-1"
       >
         SAVE
       </button>
-    </div>
+    </form>
   </div>
 </div>
